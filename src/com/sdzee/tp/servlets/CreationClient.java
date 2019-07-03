@@ -16,8 +16,12 @@ public class CreationClient extends HttpServlet {
 	public static final String ATT_CLIENT	 = "client";
 	public static final String ATT_FIELDS = "fields";
 	
+	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+        /* Affichage de la page d'inscription */
+        this.getServletContext().getRequestDispatcher( "/WEB-INF/creerClient.jsp" ).forward( request, response );
+    }
 	
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     	
         /*
          * Récupération des données saisies, envoyées en tant que paramètres de
@@ -58,6 +62,6 @@ public class CreationClient extends HttpServlet {
         request.setAttribute( ATT_FIELDS, fields);
 
         /* Transmission à la page JSP en charge de l'affichage des données */
-        this.getServletContext().getRequestDispatcher( "/afficherClient.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( "/WEB-INF/afficherClient.jsp" ).forward( request, response );
     }
 }

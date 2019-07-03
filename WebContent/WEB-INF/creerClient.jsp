@@ -9,7 +9,7 @@
     <body>
         <div>
         	<c:import url="/inc/menu.jsp" />
-        	<form method="get" action="creationClient">
+        	<form method="post" action="creationClient">
            		<c:import url="/inc/inc_client_form.jsp" />
             	<input type="submit" value="Valider"  />
             	<input type="reset" value="Remettre à zéro" /> <br />

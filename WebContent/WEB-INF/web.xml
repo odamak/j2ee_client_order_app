@@ -15,6 +15,10 @@
 		<url-pattern>/creationClient</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>CreationClient</servlet-name>
+		<url-pattern>/afficherClient</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>CreationCommande</servlet-name>
 		<url-pattern>/creationCommande</url-pattern>
 	</servlet-mapping>
