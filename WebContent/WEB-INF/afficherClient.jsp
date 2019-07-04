@@ -7,7 +7,8 @@
         <link type="text/css" rel="stylesheet" href="inc/style.css" />
     </head>
     <body>
-    	<c:import url="/inc/menu.jsp" />		
+    	<c:import url="/inc/menu.jsp" />	
+    	<p> Affichage infos client </p>	
         <%-- Affichage de la chaîne "message" transmise par la servlet --%>
         <p class="info">${ message }</p>
         <c:if test="${ fields }">

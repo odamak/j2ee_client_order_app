@@ -7,7 +7,7 @@
 <title>Menu</title>
 </head>
 <body>
-	<a href = "<c:url value = "creerClient.jsp"/>">Créer un client<br/></a>
-	<a href = "<c:url value = "creerCommande.jsp"/>">Créer une commande</a>
+	<a href = "<c:url value = "/creationClient"/>">Créer un client<br/></a>
+	<a href = "<c:url value = "/creationCommande"/>">Créer une commande</a>
 </body>
 </html>

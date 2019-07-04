@@ -1,4 +1,5 @@
 package com.sdzee.tp.servlets;
+import com.sdzee.tp.forms.* ;
 
 import java.io.IOException;
 
@@ -11,57 +12,37 @@ import com.sdzee.tp.beans.Client;
 
 public class CreationClient extends HttpServlet {
 	
-	public final static String SUCCESS_MESSAGE = "Client créé avec succès !";
-	public static final String ATT_MESSAGE = "message";
-	public static final String ATT_CLIENT	 = "client";
-	public static final String ATT_FIELDS = "fields";
+    public static final String ATT_USER = "client";
+    public static final String ATT_FORM = "form";
+    public static final String VUE_CREATION = "/WEB-INF/creerClient.jsp";
+    public static final String VUE_AFFICHAGE = "/WEB-INF/afficherClient.jsp";
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         /* Affichage de la page d'inscription */
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/creerClient.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( VUE_CREATION ).forward( request, response );
     }
 	
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     	
-        /*
-         * Récupération des données saisies, envoyées en tant que paramètres de
-         * la requête GET générée à la validation du formulaire
-         */
-        String nom = request.getParameter( "nomClient" );
-        String prenom = request.getParameter( "prenomClient" );
-        String adresse = request.getParameter( "adresseClient" );
-        String telephone = request.getParameter( "telephoneClient" );
-        String email = request.getParameter( "emailClient" );
-        String message;
-        Boolean fields;
-        /*
-         * Initialisation du message à afficher : si un des champs obligatoires
-         * du formulaire n'est pas renseigné, alors on affiche un message
-         * d'erreur, sinon on affiche un message de succès
-         */
-        if ( nom.trim().isEmpty() || adresse.trim().isEmpty() || telephone.trim().isEmpty() ) {
-            message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\" <c:url value= \"creerClient.jsp\" /> \">Cliquez ici</a> pour accéder au formulaire de création d'un client.";
-            fields = false;
-        } else {
-            message = SUCCESS_MESSAGE;
-            fields = true;
+		/* Préparation de l'objet formulaire */
+        CreationClientForm form = new CreationClientForm();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Client client = form.inscrireClient( request );
+		
+        /* Stockage du formulaire et du bean dans l'objet request */
+        request.setAttribute( ATT_FORM, form );
+        request.setAttribute( ATT_USER, client );
+        
+        System.out.println("les erreurs sont " + form.getErreurs());
+        
+        if (form.getErreurs().isEmpty()) {
+        	this.getServletContext().getRequestDispatcher( VUE_AFFICHAGE ).forward( request, response );     	
         }
-        /*
-         * Création du bean Client et initialisation avec les données récupérées
-         */
-        Client client = new Client();
-        client.setNom( nom );
-        client.setPrenom( prenom );
-        client.setAdresse( adresse );
-        client.setTelephone( telephone );
-        client.setEmail( email );
-
-        /* Ajout du bean et du message à l'objet requête */
-        request.setAttribute( ATT_CLIENT, client );
-        request.setAttribute( ATT_MESSAGE , message );
-        request.setAttribute( ATT_FIELDS, fields);
-
-        /* Transmission à la page JSP en charge de l'affichage des données */
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/afficherClient.jsp" ).forward( request, response );
+        else {
+        	this.getServletContext().getRequestDispatcher( VUE_CREATION ).forward( request, response );
+        }
+		
+        
     }
 }
