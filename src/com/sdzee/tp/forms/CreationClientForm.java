@@ -103,28 +103,34 @@ public final class CreationClientForm {
         }
     }
     
-//    private void validationTelephone( String telephone ) throws Exception {
-//    	try {  
-//    	    Double.parseDouble(telephone);  
-//    	    if ( telephone.length() < 4 ) {
-//                throw new Exception( "Le téléphone doit contenir au moins 4 caractères." );
-//            }
-//    	  } catch(NumberFormatException e){  
-//    		  throw new Exception( "Le téléphone doit contenir seulement des chiffres." );
-//    	  }
-//    }
-    
     private void validationTelephone( String telephone ) throws Exception {
-        if ( telephone != null ) {
-            if ( !telephone.matches( "^\\d+$" ) ) {
-                throw new Exception( "Le numéro de téléphone doit uniquement contenir des chiffres." );
-            } else if ( telephone.length() < 4 ) {
-                throw new Exception( "Le numéro de téléphone doit contenir au moins 4 chiffres." );
-            }
-        } else {
-            throw new Exception( "Merci d'entrer un numéro de téléphone." );
-        }
+    	if ( telephone !=null ) {
+    		try {  
+        	    Double.parseDouble(telephone);  
+        	    if ( telephone.length() < 4 ) {
+                    throw new Exception( "Le téléphone doit contenir au moins 4 caractères." );
+                }
+        	  } catch(NumberFormatException e){  
+        		  throw new Exception( "Le téléphone doit contenir seulement des chiffres." );
+        	  }	
+    	}
+    	else {
+          throw new Exception( "Merci d'entrer un numéro de téléphone." );
+      }
+    	
     }
+    
+//    private void validationTelephone( String telephone ) throws Exception {
+//        if ( telephone != null ) {
+//            if ( !telephone.matches( "^\\d+$" ) ) {
+//                throw new Exception( "Le numéro de téléphone doit uniquement contenir des chiffres." );
+//            } else if ( telephone.length() < 4 ) {
+//                throw new Exception( "Le numéro de téléphone doit contenir au moins 4 chiffres." );
+//            }
+//        } else {
+//            throw new Exception( "Merci d'entrer un numéro de téléphone." );
+//        }
+//    }
 
     private void validationEmail( String email ) throws Exception {
         if ( email != null ) {

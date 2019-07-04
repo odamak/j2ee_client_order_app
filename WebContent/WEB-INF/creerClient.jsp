@@ -11,6 +11,7 @@
         	<c:import url="/inc/menu.jsp" />
         	<form method="post" action="creationClient">
            		<c:import url="/inc/inc_client_form.jsp" />
+           		<p class="info">${ form.resultat }</p>
             	<input type="submit" value="Valider"  />
             	<input type="reset" value="Remettre à zéro" /> <br />
             </form>

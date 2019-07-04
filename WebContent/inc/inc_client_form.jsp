@@ -8,21 +8,21 @@
 	
 	<label for="prenomClient">Prénom </label>
 	<input type="text" id="prenomClient" name="prenomClient" value="${client.prenom}" size="20" maxlength="20" />
-	<span class="erreur">${form.erreurs['prenom']}</span>
+	<span class="erreur">${form.erreurs['prenomClient']}</span>
 	<br />
 	
 	<label for="adresseClient">Adresse de livraison <span class="requis">*</span></label>
 	<input type="text" id="adresseClient" name="adresseClient" value="${client.adresse}" size="20" maxlength="20" />
-	<span class="erreur">${form.erreurs['adresse']}</span>
+	<span class="erreur">${form.erreurs['adresseClient']}</span>
 	<br />
 	
 	<label for="telephoneClient">Numéro de téléphone <span class="requis">*</span></label>
 	<input type="text" id="telephoneClient" name="telephoneClient" value="${client.telephone}" size="20" maxlength="20" />
-	<span class="erreur">${form.erreurs['telephone']}</span>
+	<span class="erreur">${form.erreurs['telephoneClient']}</span>
 	<br />
 	
 	<label for="emailClient">Adresse email</label>
 	<input type="email" id="emailClient" name="emailClient" value="${client.email}" size="20" maxlength="60" />
-	<span class="erreur">${form.erreurs['email']}</span>
+	<span class="erreur">${form.erreurs['emailClient']}</span>
 	<br />
 </fieldset>
