@@ -34,42 +34,32 @@ public class CreationClient extends HttpServlet {
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
         Client client = form.inscrireClient( request );
         
+        /* Récupération de la session */
         HttpSession session = request.getSession();
-        System.out.println("session.getAttribute(ATT_SESSION_USERS is "+ session.getAttribute(ATT_SESSION_USERS));
-        if (session.getAttribute(ATT_SESSION_USERS) == null) {
-        	Map<String, Client> clients = new HashMap<String, Client> ();
-        			session.setAttribute(ATT_SESSION_USERS,clients);
-        }
+        
+        /* Création de la HashMap clients pour stocker tous les clients */
+        Map<String, Client> clients = new HashMap<String, Client> ();
+        
+        /* Chargement de la HashMap clients à partir de la session s'il y a des clients */
+        /* déjà sauvegardés */
         if (session.getAttribute(ATT_SESSION_USERS) != null) {
-        	Map<String, Client> clients = (HashMap<String, Client>) (session.getAttribute(ATT_SESSION_USERS));
-        	if (!clients.isEmpty()) {
-            	System.out.println("printing users HashMap!!!!!!");
-                for(Map.Entry m : clients.entrySet()) {
-                	System.out.println(m.getKey() + " " + m.getValue());
-                }
-                System.out.println("End printing users HashMap!!!!!!");  	
-            }
-            
-            if (form.getErreurs().isEmpty()) {
-            	clients.put(client.getPrenom()+" "+client.getNom(), client);
-            	System.out.println("printing NEW users HashMap!!!!!");
-                for(Map.Entry m : clients.entrySet()) {
-                	System.out.println(m.getKey() + " " + m.getValue());
-                }
-                System.out.println("End printing NEW users HashMap!!!!!!");
-            	
-            }
-            request.setAttribute(ATT_SESSION_USERS, clients);
+        	clients = (HashMap<String, Client>) (session.getAttribute(ATT_SESSION_USERS));
+        }
+        
+        /* Ajout du client nouvellement créé à clients s'il n'y a pas eu d'erreur */    
+        if (form.getErreurs().isEmpty()) {
+        	clients.put(client.getPrenom()+" "+client.getNom(), client);
         	
         }
         
-		
+        /* Mise à jour de l'attribut de session avec la nouvelle version de clients*/
+        session.setAttribute(ATT_SESSION_USERS, clients);
+	
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
 
         request.setAttribute( ATT_USER, client );
-        
-        System.out.println("les erreurs sont " + form.getErreurs());
+
         
         if (form.getErreurs().isEmpty()) {
         	this.getServletContext().getRequestDispatcher( VUE_AFFICHAGE ).forward( request, response );     	
