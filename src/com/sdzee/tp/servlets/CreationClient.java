@@ -17,7 +17,7 @@ public class CreationClient extends HttpServlet {
 	
     public static final String ATT_USER = "client";
     public static final String ATT_FORM = "form";
-    public static final String ATT_SESSION_USERS = "form";
+    public static final String ATT_SESSION_USERS = "clients";
     public static final String VUE_CREATION = "/WEB-INF/creerClient.jsp";
     public static final String VUE_AFFICHAGE = "/WEB-INF/afficherClient.jsp";
 	
@@ -54,6 +54,11 @@ public class CreationClient extends HttpServlet {
         
         /* Mise à jour de l'attribut de session avec la nouvelle version de clients*/
         session.setAttribute(ATT_SESSION_USERS, clients);
+        
+        /* Affichage dans console pour vérification */
+        for (Map.Entry m: clients.entrySet()) {
+        	System.out.println(m.getKey() + " " + m.getValue());
+        }
 	
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
