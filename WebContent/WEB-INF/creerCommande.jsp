@@ -7,7 +7,7 @@
         <title>Création d'une commande</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
-    <body>
+    <body onload="onLoadFunction()">
         <c:import url="/inc/menu.jsp" />
         <div>
             <form method="post" action="<c:url value="/creationCommande"/>">
@@ -19,8 +19,67 @@
                 <c:set var="client" value="${ commande.client }" scope="request" />
                 <fieldset>
                     <legend>Informations client</legend>
-                    <c:import url="/inc/inc_client_form.jsp" />
-                </fieldset>
+                    <p>Nouveau client? <span class="requis">*</span></p>
+                    <input type="radio" name="radioClient" value="oui" onclick="fonctionOui()"> Oui
+                    <input type="radio" name="radioClient" value="non" onclick="fonctionNon()"> Non<br>
+                    
+                    <script type="text/javascript" src="/inc/jquery-3.4.1.min.js">
+                    </script>
+                    <script type="text/javascript">
+						function fonctionOui() {
+							document.getElementById("ancienClient").style.display = "none";
+							document.getElementById("nouveauClient").style.display = "block";
+							//alert("Hello! I am an alert box Oui!");
+						}
+						function fonctionNon() {
+							document.getElementById("nouveauClient").style.display = "none";
+							document.getElementById("ancienClient").style.display = "block";
+							//alert("Hello! I am an alert box Non!");
+						}
+						function onLoadFunction() {
+							document.getElementById("ancienClient").style.display = "none";
+							document.getElementById("nouveauClient").style.display = "none";
+							//alert("Hello! I am on load function");
+							}
+					</script>
+                    <div id="ancienClient">
+		                    <select>
+							  <option value="" selected disabled hidden>Choisissez un client...</option>
+							  <option value="1">One</option>
+							  <option value="2">Two</option>
+							  <option value="3">Three</option>
+							  <option value="4">Four</option>
+							  <option value="5">Five</option>
+							</select>
+					</div>
+					
+					<p id="nouveauClient">
+                    		<label for="nomClient">Nom <span class="requis">*</span></label>
+							<input type="text" id="nomClient" name="nomClient" value="${client.nom}" size="20" maxlength="20" />
+							<span class="erreur">${form.erreurs['nomClient']}</span>
+							<br />
+							
+							<label for="prenomClient">Prénom </label>
+							<input type="text" id="prenomClient" name="prenomClient" value="${client.prenom}" size="20" maxlength="20" />
+							<span class="erreur">${form.erreurs['prenomClient']}</span>
+							<br />
+							
+							<label for="adresseClient">Adresse de livraison <span class="requis">*</span></label>
+							<input type="text" id="adresseClient" name="adresseClient" value="${client.adresse}" size="20" maxlength="20" />
+							<span class="erreur">${form.erreurs['adresseClient']}</span>
+							<br />
+							
+							<label for="telephoneClient">Numéro de téléphone <span class="requis">*</span></label>
+							<input type="text" id="telephoneClient" name="telephoneClient" value="${client.telephone}" size="20" maxlength="20" />
+							<span class="erreur">${form.erreurs['telephoneClient']}</span>
+							<br />
+							
+							<label for="emailClient">Adresse email</label>
+							<input type="email" id="emailClient" name="emailClient" value="${client.email}" size="20" maxlength="60" />
+							<span class="erreur">${form.erreurs['emailClient']}</span>
+							<br />
+                    </p>
+				</fieldset>
                 <fieldset>
                     <legend>Informations commande</legend>
                     
