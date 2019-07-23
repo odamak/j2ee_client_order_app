@@ -43,14 +43,12 @@
 							}
 					</script>
                     <div id="ancienClient">
-		                    <select>
-							  <option value="" selected disabled hidden>Choisissez un client...</option>
-							  <option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-							  <option value="4">Four</option>
-							  <option value="5">Five</option>
-							</select>
+                    <select>
+                    	<option value="" selected disabled hidden>Choisissez un client...</option>
+                    	<c:forEach items="${sessionScope.clients}" var="element">
+                    		<option value="${element.key}">${element.key}</option>
+                    	</c:forEach>
+                    </select>
 					</div>
 				</fieldset>
                 <fieldset>
