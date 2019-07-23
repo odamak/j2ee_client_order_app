@@ -11,18 +11,13 @@
     	<p> Affichage infos client </p>	
         <%-- Affichage de la chaîne "message" transmise par la servlet --%>
         <p class="info">${ message }</p>
-        <c:choose>
-        	<c:when test="${ !empty client }">
+        <c:if test="${ !empty client }">
 	        	<%-- Puis affichage des données enregistrées dans le bean "client" transmis par la servlet --%>
 		        <p>Nom : <c:out value="${ client.nom }" /></p>
 		        <p>Prénom : <c:out value="${ client.prenom }" /></p>
 		        <p>Adresse : <c:out value="${ client.adresse }" /></p>
 		        <p>Numéro de téléphone : <c:out value="${ client.telephone }" /></p>
 		        <p>Email : <c:out value="${ client.email }" /></p>
-        	</c:when>
-        	<c:otherwise>
-        		<p> Nothing to display </p>
-        	</c:otherwise>
-        </c:choose>
+        </c:if>
     </body>
 </html>
