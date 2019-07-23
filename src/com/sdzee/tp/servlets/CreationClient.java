@@ -56,9 +56,9 @@ public class CreationClient extends HttpServlet {
         session.setAttribute(ATT_SESSION_USERS, clients);
         
         /* Affichage dans console pour vérification */
-        for (Map.Entry m: clients.entrySet()) {
-        	System.out.println(m.getKey() + " " + m.getValue());
-        }
+//        for (Map.Entry m: clients.entrySet()) {
+//        	System.out.println(m.getKey() + " " + m.getValue());
+//        }
 	
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
