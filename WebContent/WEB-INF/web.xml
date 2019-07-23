@@ -9,6 +9,10 @@
 		<servlet-name>CreationCommande</servlet-name>
 		<servlet-class>com.sdzee.tp.servlets.CreationCommande</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ListerClients</servlet-name>
+		<servlet-class>com.sdzee.tp.servlets.ListerClients</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>CreationClient</servlet-name>
@@ -21,6 +25,10 @@
 	<servlet-mapping>
 		<servlet-name>CreationCommande</servlet-name>
 		<url-pattern>/creationCommande</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ListerClients</servlet-name>
+		<url-pattern>/listerClients</url-pattern>
 	</servlet-mapping>
 	<jsp-config>
 		<jsp-property-group>

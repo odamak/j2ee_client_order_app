@@ -8,6 +8,7 @@
 </head>
 <body>
 	<a href = "<c:url value = "/creationClient"/>">Créer un client<br/></a>
-	<a href = "<c:url value = "/creationCommande"/>">Créer une commande</a>
+	<a href = "<c:url value = "/creationCommande"/>">Créer une commande</a> <br>
+	<a href = "<c:url value = "/listerClients"/>">Lister clients</a> <br>
 </body>
 </html>

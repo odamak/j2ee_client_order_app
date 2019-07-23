@@ -48,3 +48,21 @@ form input.sansLabel {
     font-style: italic;
     color: #E8A22B;
 }
+
+table, td, th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  height: 20px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
