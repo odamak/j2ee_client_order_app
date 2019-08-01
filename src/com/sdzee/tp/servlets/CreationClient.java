@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.sdzee.tp.beans.Client;
 
-public class CreationClient extends HttpServlet {
+import java.io.Serializable;
+
+public class CreationClient extends HttpServlet implements Serializable {
 	
     public static final String ATT_USER = "client";
     public static final String ATT_FORM = "form";

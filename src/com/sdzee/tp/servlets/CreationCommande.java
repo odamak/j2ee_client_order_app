@@ -14,7 +14,9 @@ import com.sdzee.tp.beans.Client;
 import com.sdzee.tp.beans.Commande;
 import com.sdzee.tp.forms.CreationCommandeForm;
 
-public class CreationCommande extends HttpServlet {
+import java.io.Serializable;
+
+public class CreationCommande extends HttpServlet implements Serializable {
     public static final String ATT_COMMANDE = "commande";
     public static final String ATT_FORM     = "form";
     public static final String ATT_SESSION_COMMANDES = "commandes";

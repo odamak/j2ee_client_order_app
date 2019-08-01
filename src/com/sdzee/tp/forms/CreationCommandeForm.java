@@ -63,6 +63,7 @@ public final class CreationCommandeForm {
         DateTime dt = new DateTime();
         DateTimeFormatter formatter = DateTimeFormat.forPattern( FORMAT_DATE );
         String date = dt.toString( formatter );
+        System.out.println("date just received the following value \""+date+"\"");
 
         String montant = getValeurChamp( request, CHAMP_MONTANT );
         String modePaiement = getValeurChamp( request, CHAMP_MODE_PAIEMENT );
@@ -75,6 +76,8 @@ public final class CreationCommandeForm {
         commande.setClient( client );
 
         commande.setDate( date );
+        
+        System.out.println("getting the date after just setting it: \""+commande.getDate()+"\"");
 
         double valeurMontant = -1;
         try {

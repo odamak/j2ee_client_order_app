@@ -19,14 +19,18 @@
 					    <th>Email</th>
 					    <th>Supprimer</th>
 					</tr>
-	  				<c:forEach items="${sessionScope.clients}" var="element">    
+	  				<c:forEach items="${sessionScope.clients}" var="element">
+	  				<c:url value="/suppressionClient" context="/" var="suppression">
+					  <c:param name="prenom"   value="${element.value.prenom}" />
+					  <c:param name="nom"    value="${element.value.nom}" />
+					</c:url>    
 						<tr>
 						    <td>${element.value.nom}</td>
 						    <td>${element.value.prenom}</td>
 						    <td>${element.value.adresse}</td>
 						    <td>${element.value.telephone}</td>
 						    <td>${element.value.email}</td>
-						    <td>suppression</td>
+							<td> <a href = "<c:url value = "${suppression}"/>"> Suppression</a> </td>					
 						</tr>
 					</c:forEach>
 				</table>

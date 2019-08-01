@@ -26,7 +26,10 @@
 				    		<th>Statut de la livraison</th>
 				    		<th>Supprimer</th>
 						</tr>
-						<c:forEach items="${sessionScope.commandes}" var="element">    
+						<c:forEach items="${sessionScope.commandes}" var="element">
+						<c:url value="/suppressionCommande" context="/" var="suppression">
+					  		<c:param name="date"   value="${element.value.date}" />
+						</c:url>    
 						<tr>
 						    <td>${element.value.client.nom}</td>
 						    <td>${element.value.client.prenom}</td>
@@ -39,7 +42,7 @@
 						    <td>${element.value.statutPaiement}</td>
 						    <td>${element.value.modeLivraison}</td>
 						    <td>${element.value.statutLivraison}</td>
-						    <td>suppression</td>
+						    <td> <a href = "<c:url value = "${suppression}"/>"> Suppression</a> </td>
 						</tr>
 						</c:forEach>
 					</table>
