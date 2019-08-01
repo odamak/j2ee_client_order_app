@@ -27,14 +27,6 @@ public class SuppressionCommande extends HttpServlet {
         
         Map<String, Commande> commandes = (HashMap<String, Commande>) (session.getAttribute(ATT_SESSION_COMMANDES));
         
-        System.out.println("printing value of date\""+date+"\"");
-        System.out.println("printing orders");
-        for (String name: commandes.keySet()){
-            String key = name.toString();
-            String value = commandes.get(name).toString();  
-            System.out.println("\""+key + "\" " + value);  
-} 
-        
         commandes.remove(date);
 		
         this.getServletContext().getRequestDispatcher( VUE_AFFICHAGE ).forward( request, response );
