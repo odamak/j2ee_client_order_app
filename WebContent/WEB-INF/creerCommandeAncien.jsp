@@ -10,7 +10,7 @@
     <body onload="onLoadFunction()">
         <c:import url="/inc/menu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/creationCommande"/>">
+            <form method="post" action="<c:url value="/creationCommandeAncien"/>">
                 <%-- Petite astuce ici : placer le client accessible via  
                  l'EL ${ commande.client } dans une variable "client" de 
                  portée request, pour que le code du fragment fonctionne
@@ -19,9 +19,11 @@
                 <c:set var="client" value="${ commande.client }" scope="request" />
                 <fieldset>
                     <legend>Informations client</legend>
-                    <div id="nouveauClient">
-                    	<c:import url="/inc/inc_client_form.jsp" />
-                    </div>
+                    <select name="ancienClient">
+                    	<c:forEach items="${sessionScope.clients}" var="element">
+                    		<option value="${element.key}">${element.key}</option>
+                    	</c:forEach>
+                    </select>
 				</fieldset>
                 <fieldset>
                     <legend>Informations commande</legend>

@@ -14,15 +14,21 @@ import com.sdzee.tp.beans.Client;
 import com.sdzee.tp.beans.Commande;
 import com.sdzee.tp.forms.CreationCommandeForm;
 
-public class CreationCommande extends HttpServlet {
+public class CreationCommandeAncien extends HttpServlet {
     public static final String ATT_COMMANDE = "commande";
     public static final String ATT_FORM     = "form";
     public static final String ATT_SESSION_COMMANDES = "commandes";
     public static final String ATT_SESSION_NOUVEAU_CLIENT = "nouveauClient";
-
+    public static final String ATT_SESSION_USERS = "clients";
+    
+    public static final String ATT_NOM = "nomClient";
+    public static final String ATT_PRENOM = "prenomClient";
+    public static final String ATT_ADRESSE = "adresseClient";
+    public static final String ATT_TELEPHONE = "telephoneClient";
+    public static final String ATT_EMAIL = "emailClient";
 
     public static final String VUE_SUCCES   = "/WEB-INF/afficherCommande.jsp";
-    public static final String VUE_FORM     = "/WEB-INF/creerCommande.jsp";
+    public static final String VUE_FORM     = "/WEB-INF/creerCommandeAncien.jsp";
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* À la réception d'une requête GET, simple affichage du formulaire */
@@ -30,15 +36,35 @@ public class CreationCommande extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        /* Préparation de l'objet formulaire */
-        CreationCommandeForm form = new CreationCommandeForm();
-
-        /* Traitement de la requête et récupération du bean en résultant */
-        Commande commande = form.creerCommande( request, false );
-        
+            
         /* Récupération de la session */
         HttpSession session = request.getSession();
         
+        String choix = request.getParameter("ancienClient");
+        
+        Map<String, Client> clients = new HashMap<String, Client> ();
+        if (session.getAttribute(ATT_SESSION_USERS) != null) {
+        	clients = (HashMap<String, Client>) (session.getAttribute(ATT_SESSION_USERS));
+        }
+        
+        /* Récupération de toute les propriétés du client à partir de la hashmap qui contient tous les clients "clients" */
+        /* et en utilisant l'id "choix" recupéré à partir du paramètre de requête "ancienClient" qui contient nom+prénom */
+        Client client = clients.get(choix);
+        
+        /* Affichage dans console pour vérification */
+//        System.out.println("par exemple adresse client choisi est " + client.getAdresse());
+        
+        boolean isClientOld = false;
+        
+        if (client != null) {
+        	isClientOld = true;
+        	request.setAttribute(ATT_NOM, client.getNom());
+    		request.setAttribute(ATT_PRENOM, client.getPrenom());
+    		request.setAttribute(ATT_ADRESSE, client.getAdresse());
+    		request.setAttribute(ATT_TELEPHONE, client.getTelephone());
+    		request.setAttribute(ATT_EMAIL, client.getEmail());
+        }
+      
         /* Création de la HashMap commandes pour stocker toutes les commandes */
         Map<String, Commande> commandes = new HashMap<String, Commande> ();
         
@@ -47,6 +73,12 @@ public class CreationCommande extends HttpServlet {
         if (session.getAttribute(ATT_SESSION_COMMANDES) != null) {
         	commandes = (HashMap<String, Commande>) (session.getAttribute(ATT_SESSION_COMMANDES));
         }
+        
+        /* Préparation de l'objet formulaire */
+        CreationCommandeForm form = new CreationCommandeForm();
+
+        /* Traitement de la requête et récupération du bean en résultant */
+        Commande commande = form.creerCommande( request, isClientOld );
         
         /* Ajout de la commande nouvellement créée à commandes s'il n'y a pas eu d'erreur */    
         if (form.getErreurs().isEmpty()) {

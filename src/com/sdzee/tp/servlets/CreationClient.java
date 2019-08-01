@@ -32,7 +32,7 @@ public class CreationClient extends HttpServlet {
         CreationClientForm form = new CreationClientForm();
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-        Client client = form.inscrireClient( request );
+        Client client = form.inscrireClient( request, false );
         
         /* Récupération de la session */
         HttpSession session = request.getSession();

@@ -10,8 +10,20 @@
 		<servlet-class>com.sdzee.tp.servlets.CreationCommande</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>CreationCommandeAncien</servlet-name>
+		<servlet-class>com.sdzee.tp.servlets.CreationCommandeAncien</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>ListerClients</servlet-name>
 		<servlet-class>com.sdzee.tp.servlets.ListerClients</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ListerCommandes</servlet-name>
+		<servlet-class>com.sdzee.tp.servlets.ListerCommandes</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ChoixTypeClient</servlet-name>
+		<servlet-class>com.sdzee.tp.servlets.ChoixTypeClient</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -27,8 +39,20 @@
 		<url-pattern>/creationCommande</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>CreationCommandeAncien</servlet-name>
+		<url-pattern>/creationCommandeAncien</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>ListerClients</servlet-name>
 		<url-pattern>/listerClients</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ListerCommandes</servlet-name>
+		<url-pattern>/listerCommandes</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChoixTypeClient</servlet-name>
+		<url-pattern>/choixTypeClient</url-pattern>
 	</servlet-mapping>
 	<jsp-config>
 		<jsp-property-group>

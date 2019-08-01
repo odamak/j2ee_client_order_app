@@ -33,15 +33,16 @@ public final class CreationCommandeForm {
         return resultat;
     }
 
-    public Commande creerCommande( HttpServletRequest request ) {
+    public Commande creerCommande( HttpServletRequest request, boolean isClientOld ) {
         /*
          * L'objet métier pour valider la création d'un client existe déjà, il
          * est donc déconseillé de dupliquer ici son contenu ! À la place, il
          * suffit de passer la requête courante à l'objet métier existant et de
          * récupérer l'objet Client créé.
          */
-        CreationClientForm clientForm = new CreationClientForm();
-        Client client = clientForm.inscrireClient( request );
+    	
+    	CreationClientForm clientForm = new CreationClientForm();
+    	Client client = clientForm.inscrireClient( request, isClientOld );
 
         /*
          * Et très important, il ne faut pas oublier de récupérer le contenu de

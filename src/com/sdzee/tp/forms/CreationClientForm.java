@@ -25,56 +25,93 @@ public final class CreationClientForm {
     }
     
 
-    public Client inscrireClient( HttpServletRequest request ) {
-        String nom = getValeurChamp( request, CHAMP_NOM );
-        String prenom = getValeurChamp( request, CHAMP_PRENOM );
-        String adresse = getValeurChamp( request, CHAMP_ADRESSE );
-        String telephone = getValeurChamp( request, CHAMP_TELEPHONE );
-        String email = getValeurChamp( request, CHAMP_EMAIL );
-
+    public Client inscrireClient( HttpServletRequest request, boolean isClientOld ) {
+    	
+    	String nom;
+        String prenom;
+        String adresse;
+        String telephone;
+        String email;
+    	
+    	if (!isClientOld) {
+    		nom = getValeurChamp( request, CHAMP_NOM );
+            prenom = getValeurChamp( request, CHAMP_PRENOM );
+            adresse = getValeurChamp( request, CHAMP_ADRESSE );
+            telephone = getValeurChamp( request, CHAMP_TELEPHONE );
+            email = getValeurChamp( request, CHAMP_EMAIL );
+    	}
+    	else {
+    		nom = getValeurAttribut( request, CHAMP_NOM );
+            prenom = getValeurAttribut( request, CHAMP_PRENOM );
+            adresse = getValeurAttribut( request, CHAMP_ADRESSE );
+            telephone = getValeurAttribut( request, CHAMP_TELEPHONE );
+            email = getValeurAttribut( request, CHAMP_EMAIL );
+    		
+    	}
+        
 
         Client client = new Client();
         
-        try {
-            validationNom( nom );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_NOM, e.getMessage() );
-        }
-        client.setNom( nom );
-        
-        try {
-            validationPrenom( prenom );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_PRENOM, e.getMessage() );
-        }
-        client.setPrenom( prenom );
-        
-        try {
-            validationAdresse( adresse );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_ADRESSE, e.getMessage() );
-        }
-        client.setAdresse( adresse );
-        
-        try {
-            validationTelephone( telephone );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_TELEPHONE, e.getMessage() );
-        }
-        client.setTelephone( telephone );
+        if (!isClientOld) {
+        	
+        	try {
+                validationNom( nom );
+            } catch ( Exception e ) {
+                setErreur( CHAMP_NOM, e.getMessage() );
+                System.out.println("erreur nom " + e.getMessage());
+            }
+            
+            
+            try {
+                validationPrenom( prenom );
+            } catch ( Exception e ) {
+                setErreur( CHAMP_PRENOM, e.getMessage() );
+                System.out.println("erreur prenom " + e.getMessage());
 
-        try {
-            validationEmail( email );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_EMAIL, e.getMessage() );
+            }
+            
+            
+            try {
+                validationAdresse( adresse );
+            } catch ( Exception e ) {
+                setErreur( CHAMP_ADRESSE, e.getMessage() );
+                System.out.println("erreur adresse " + e.getMessage());
+
+            }
+            
+            
+            try {
+                validationTelephone( telephone );
+            } catch ( Exception e ) {
+                setErreur( CHAMP_TELEPHONE, e.getMessage() );
+                System.out.println("erreur telephone " + e.getMessage());
+
+            }
+            
+
+            try {
+                validationEmail( email );
+            } catch ( Exception e ) {
+                setErreur( CHAMP_EMAIL, e.getMessage() );
+                System.out.println("erreur email " + e.getMessage());
+
+            }
+  	
         }
-        client.setEmail( email );
+                
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'inscription.";
         } else {
             resultat = "Échec de l'inscription.";
+
         }
+        
+        client.setNom( nom );
+        client.setPrenom( prenom );
+        client.setAdresse( adresse );
+        client.setTelephone( telephone );
+        client.setEmail( email );
 
         return client;
     }
@@ -162,7 +199,15 @@ public final class CreationClientForm {
             return valeur.trim();
         }
     }
-
-
+    
+    private static String getValeurAttribut( HttpServletRequest request, String nomAttribut ) {
+        String valeur = (String) request.getAttribute ( nomAttribut );
+        if ( valeur == null || valeur.trim().length() == 0 ) {
+            return null;
+        } else {
+            return valeur.trim();
+        }
+    }
+    
 
 }
