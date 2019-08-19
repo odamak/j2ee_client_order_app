@@ -55,6 +55,10 @@
 		<param-value>/fichiers/</param-value> 
 	</init-param>
   </servlet>
+  <servlet>
+	<servlet-name>GestionTestJDBC</servlet-name>
+	<servlet-class>com.sdzee.tp.servlets.GestionTestJDBC</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>CreationClient</servlet-name>
     <url-pattern>/creationClient</url-pattern>
@@ -98,6 +102,10 @@
   <servlet-mapping>
 	<servlet-name>Download</servlet-name>
 	<url-pattern>/fichiers/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>GestionTestJDBC</servlet-name>
+	<url-pattern>/testjdbc</url-pattern>
   </servlet-mapping>
   <jsp-config>
     <jsp-property-group>
